@@ -876,16 +876,6 @@ class CRM_Fastactivity_Form_Add extends CRM_Fastactivity_Form_Base {
     $defaults = $this->_values + CRM_Core_Form_RecurringEntity::setDefaultValues();
     // if we're editing...
     if (isset($this->_activityId)) {
-      if (empty($defaults['activity_date_time'])) {
-        list($defaults['activity_date_time'], $defaults['activity_date_time_time']) = CRM_Utils_Date::setDateDefaults(NULL, 'activityDateTime');
-      }
-      elseif ($this->_action & CRM_Core_Action::UPDATE) {
-        $this->assign('current_activity_date_time', $defaults['activity_date_time']);
-        list($defaults['activity_date_time'],
-          $defaults['activity_date_time_time']
-          ) = CRM_Utils_Date::setDateDefaults($defaults['activity_date_time'], 'activityDateTime');
-        list($defaults['repetition_start_date'], $defaults['repetition_start_date_time']) = CRM_Utils_Date::setDateDefaults($defaults['activity_date_time'], 'activityDateTime');
-      }
 
       $defaults['target_contact_count'] = $this->_activityTargetCount;
 
@@ -900,8 +890,6 @@ class CRM_Fastactivity_Form_Add extends CRM_Fastactivity_Form_Base {
       $defaults['source_contact_id'] = $this->_sourceContactId;
       $defaults['target_contact_id'] = $this->_targetContactId;
 
-      list($defaults['activity_date_time'], $defaults['activity_date_time_time'])
-        = CRM_Utils_Date::setDateDefaults(NULL, 'activityDateTime');
     }
 
     if ($this->_activityTypeId) {
